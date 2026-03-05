@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tableBadge {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.main {
+  flex: 1;
+  padding: 16px;
+  padding-bottom: 80px;
+}
+
+.bottomNav {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 768px;
+  margin: 0 auto;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  z-index: 10;
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  min-height: 56px;
+  transition: color 0.2s;
+}
+
+.navItem.active {
+  color: var(--color-primary);
+  font-weight: 600;
+}

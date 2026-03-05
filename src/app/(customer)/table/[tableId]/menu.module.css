@@ -1,0 +1,99 @@
+.categories {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 0 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.categoryBtn {
+  padding: 8px 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  white-space: nowrap;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.categoryBtn.active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.menuCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menuName {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.menuDesc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.menuBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.menuPrice {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.addBtn {
+  padding: 8px 14px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.85rem;
+  min-height: 36px;
+}
+
+.addBtn:hover {
+  background: var(--color-primary-hover);
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--color-text-secondary);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--color-text-secondary);
+}
+
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-success);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}

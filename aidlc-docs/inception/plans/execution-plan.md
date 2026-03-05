@@ -16,55 +16,30 @@
 
 ## Workflow Visualization
 
-```mermaid
-flowchart TD
-    Start(["User Request"])
-
-    subgraph INCEPTION["🔵 INCEPTION PHASE"]
-        WD["Workspace Detection<br/><b>COMPLETED</b>"]
-        RA["Requirements Analysis<br/><b>COMPLETED</b>"]
-        WP["Workflow Planning<br/><b>COMPLETED</b>"]
-        AD["Application Design<br/><b>EXECUTE</b>"]
-        UG["Units Generation<br/><b>EXECUTE</b>"]
-    end
-
-    subgraph CONSTRUCTION["🟢 CONSTRUCTION PHASE"]
-        FD["Functional Design<br/><b>EXECUTE</b>"]
-        CG["Code Generation<br/><b>EXECUTE</b>"]
-        BT["Build and Test<br/><b>EXECUTE</b>"]
-    end
-
-    Start --> WD --> RA --> WP --> AD --> UG
-    UG --> FD --> CG --> BT --> End(["Complete"])
-
-    style WD fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
-    style RA fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
-    style WP fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
-    style AD fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style UG fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style FD fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style CG fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
-    style BT fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
-    style INCEPTION fill:#BBDEFB,stroke:#1565C0,stroke-width:3px,color:#000
-    style CONSTRUCTION fill:#C8E6C9,stroke:#2E7D32,stroke-width:3px,color:#000
-    style Start fill:#CE93D8,stroke:#6A1B9A,stroke-width:3px,color:#000
-    style End fill:#CE93D8,stroke:#6A1B9A,stroke-width:3px,color:#000
-    linkStyle default stroke:#333,stroke-width:2px
-```
-
 ### Text Alternative
 ```
 Phase 1: INCEPTION
   - Workspace Detection (COMPLETED)
   - Requirements Analysis (COMPLETED)
+  - User Stories (SKIP)
   - Workflow Planning (COMPLETED)
-  - Application Design (EXECUTE)
-  - Units Generation (EXECUTE)
+  - Application Design (COMPLETED)
+  - Units Generation (COMPLETED)
 
 Phase 2: CONSTRUCTION
-  - Functional Design (EXECUTE, per-unit)
-  - Code Generation (EXECUTE, per-unit)
-  - Build and Test (EXECUTE)
+  Unit 1 (Foundation):
+    - Functional Design (COMPLETED)
+    - Code Generation (COMPLETED)
+  Unit 2 (Menu):
+    - Functional Design (COMPLETED)
+    - Code Generation (COMPLETED)
+  Unit 3 (Order):
+    - Functional Design (COMPLETED)
+    - Code Generation (COMPLETED)
+  Unit 4 (Admin Dashboard):
+    - Functional Design (COMPLETED)
+    - Code Generation (IN PROGRESS - 대시보드 페이지 미구현)
+  - Build and Test (PENDING)
 ```
 
 ---
@@ -75,29 +50,77 @@ Phase 2: CONSTRUCTION
 - [x] Workspace Detection (COMPLETED)
 - [x] Requirements Analysis (COMPLETED)
 - [x] User Stories - SKIP
-  - **Rationale**: 단일 매장 MVP, 사용자 유형이 명확 (고객/관리자), 요구사항이 충분히 상세
 - [x] Workflow Planning (COMPLETED)
-- [ ] Application Design - EXECUTE
-  - **Rationale**: 신규 프로젝트로 컴포넌트 식별, 서비스 레이어 설계, API 설계 필요
-- [ ] Units Generation - EXECUTE
-  - **Rationale**: 고객용/관리자용/공통 백엔드 등 복수 유닛으로 분해 필요
+- [x] Application Design (COMPLETED)
+- [x] Units Generation (COMPLETED)
 
 ### 🟢 CONSTRUCTION PHASE
-- [ ] Functional Design - EXECUTE (per-unit)
-  - **Rationale**: 데이터 모델, 비즈니스 로직, API 상세 설계 필요
-- [ ] NFR Requirements - SKIP
-  - **Rationale**: 소규모 MVP, 보안 확장 미적용, 특별한 NFR 요구 없음
-- [ ] NFR Design - SKIP
-  - **Rationale**: NFR Requirements 건너뛰므로 해당 없음
-- [ ] Infrastructure Design - SKIP
-  - **Rationale**: 로컬 개발 환경만 사용, 클라우드 인프라 불필요
-- [ ] Code Generation - EXECUTE (per-unit, ALWAYS)
-  - **Rationale**: 실제 코드 구현 필요
-- [ ] Build and Test - EXECUTE (ALWAYS)
-  - **Rationale**: 빌드 및 테스트 지침 필요
+
+#### Unit 1: Foundation
+- [x] Functional Design (COMPLETED)
+- [x] Code Generation (COMPLETED)
+  - 구현 완료: Prisma 스키마, 시드 데이터, JWT 인증, 로그인 API, 로그인 페이지, 레이아웃, 미들웨어
+
+#### Unit 2: Menu
+- [x] Functional Design (COMPLETED)
+- [x] Code Generation (COMPLETED)
+  - 구현 완료: MenuService, 메뉴 CRUD API, 카테고리 API, 고객 메뉴 조회 페이지, 관리자 메뉴 관리 페이지
+
+#### Unit 3: Order
+- [x] Functional Design (COMPLETED)
+- [x] Code Generation (COMPLETED)
+  - 구현 완료: OrderService, 주문 생성/조회 API, 고객 장바구니 페이지, 고객 주문내역 페이지
+
+#### Unit 4: Admin Dashboard
+- [x] Functional Design (COMPLETED)
+- [ ] Code Generation (IN PROGRESS)
+  - ✅ 구현 완료: TableService, 테이블 CRUD API, 이용완료 API, 과거내역 API, 테이블 관리 페이지, SSE 스트림 라우트, 로그아웃 API
+  - ❌ 미구현: 관리자 대시보드 페이지 (실시간 주문 모니터링 그리드 UI)
+  - ⚠️ 버그: SSE 스트림 라우트에서 잘못된 import 경로 (`@/lib/db/prisma` → `@/lib/db`)
+  - ⚠️ 버그: 로그인 후 리다이렉트 문제 (수정 완료 - window.location.href 사용)
+
+#### Build and Test
+- [ ] Build and Test (PENDING - 모든 유닛 완료 후)
 
 ### 🟡 OPERATIONS PHASE
 - [ ] Operations - PLACEHOLDER
+
+---
+
+## 현재 구현 상태 요약
+
+### 구현 완료된 파일
+**백엔드 (API + 서비스)**
+- `src/lib/db/index.ts` - Prisma 클라이언트
+- `src/lib/auth/jwt.ts` - JWT 생성/검증
+- `src/lib/auth/jwt-edge.ts` - Edge Runtime JWT 검증
+- `src/lib/auth/middleware.ts` - 인증 미들웨어
+- `src/lib/services/auth-service.ts` - 인증 서비스
+- `src/lib/services/menu-service.ts` - 메뉴 서비스
+- `src/lib/services/order-service.ts` - 주문 서비스
+- `src/lib/services/table-service.ts` - 테이블 서비스
+- `src/lib/api-utils.ts` - API 응답 헬퍼
+- `src/middleware.ts` - Next.js 미들웨어 (라우트 보호)
+- `src/app/api/auth/*` - 인증 API (로그인, 로그아웃, 검증)
+- `src/app/api/menu/*` - 메뉴 API (CRUD, 카테고리)
+- `src/app/api/orders/route.ts` - 주문 API (생성, 조회)
+- `src/app/api/tables/*` - 테이블 API (CRUD, 이용완료, 과거내역)
+- `src/app/api/admin/orders/stream/route.ts` - SSE 스트림
+
+**프론트엔드 (페이지)**
+- `src/app/(customer)/table/[tableId]/login/page.tsx` - 테이블 로그인
+- `src/app/(customer)/table/[tableId]/page.tsx` - 고객 메뉴 조회
+- `src/app/(customer)/table/[tableId]/cart/page.tsx` - 장바구니
+- `src/app/(customer)/table/[tableId]/orders/page.tsx` - 주문내역
+- `src/app/(admin)/admin/login/page.tsx` - 관리자 로그인
+- `src/app/(admin)/admin/menu/page.tsx` - 메뉴 관리
+- `src/app/(admin)/admin/tables/page.tsx` - 테이블 관리
+- `src/app/(admin)/admin/page.tsx` - 대시보드 (플레이스홀더)
+
+### 남은 작업
+1. 관리자 대시보드 페이지 구현 (실시간 주문 모니터링 그리드 UI)
+2. SSE 스트림 import 경로 수정
+3. Build and Test 단계
 
 ---
 
